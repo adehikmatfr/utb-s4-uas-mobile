@@ -114,7 +114,6 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void firebaseAuthWithEmail(String name,String email, String password) {
-        String hashedPassword = Password.hash(password).withBCrypt().getResult();
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     progressBar.setVisibility(View.GONE);
@@ -123,7 +122,6 @@ public class SignupActivity extends AppCompatActivity {
                         Map<String, Object> user = new HashMap<>();
                         user.put("email", email);
                         user.put("name", name);
-                        user.put("password", hashedPassword);
 
                         db.collection("users").document(userId)
                                 .set(user)
