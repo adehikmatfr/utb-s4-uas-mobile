@@ -8,15 +8,10 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
 import com.example.utb_adehikmatfr.recyclerview.AdapterList;
 import com.example.utb_adehikmatfr.recyclerview.ItemList;
@@ -24,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -31,30 +27,28 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+public class HomeActivity extends AppCompatActivity {
 
-public class MainActivity extends AppCompatActivity {
-
-    private RecyclerView recyclerView;
-    private FloatingActionButton floatingActionButton;
     private AdapterList myAdapter;
     private List<ItemList> itemList;
     private FirebaseFirestore db;
     private ProgressDialog progressDialog;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home);
 
+        mAuth = FirebaseAuth.getInstance();
         // Initialize Firebase
         FirebaseApp.initializeApp(this);
         db = FirebaseFirestore.getInstance();
 
         // Initialize UI components
-        recyclerView = findViewById(R.id.recycler_view);
-        floatingActionButton = findViewById(R.id.floatAddNews);
-        progressDialog = new ProgressDialog(MainActivity.this);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        FloatingActionButton floatingActionButton = findViewById(R.id.floatAddNews);
+        progressDialog = new ProgressDialog(HomeActivity.this);
         progressDialog.setTitle("Loading...");
 
         // Setup RecyclerView
@@ -68,9 +62,18 @@ public class MainActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent toAddPage = new Intent(MainActivity.this, NewsAdd.class);
+                Intent toAddPage = new Intent(HomeActivity.this, NewsAdd.class);
                 startActivity(toAddPage);
             }
+        });
+
+        FloatingActionButton floatLogout = findViewById(R.id.floatLogout);
+        floatLogout.setOnClickListener(view -> {
+            // Handle logout action
+            mAuth.signOut();
+            Intent intent = new Intent(HomeActivity.this, SigningActivity.class);
+            startActivity(intent);
+            finish(); // Hentikan HomeActivity
         });
 
         // Fetch data from Firestore
@@ -79,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         myAdapter.setOnItemClickListener(new AdapterList.OnItemClickListener() {
             @Override
             public void onItemClick(ItemList item) {
-                Intent intent = new Intent(MainActivity.this, NewsDetail.class);
+                Intent intent = new Intent(HomeActivity.this, NewsDetail.class);
                 intent.putExtra("id", item.getId());
                 intent.putExtra("title", item.getTitle());
                 intent.putExtra("desc", item.getDescription());

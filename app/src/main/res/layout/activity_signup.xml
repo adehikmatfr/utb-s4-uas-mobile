@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000000">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="#000000"
+        android:theme="@style/Theme.AppCompat.Light.Dialog"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/back_arrowtopic"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:contentDescription="@string/arrow_back" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="125dp"
+                android:layout_height="36dp"
+                android:padding="8dp"
+                app:layout_constraintStart_toEndOf="@+id/back_arrowtopic"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:srcCompat="@drawable/ic_news_text_logo"
+                android:contentDescription="@string/news_top" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- Login Form Section -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="32dp">
+        <!-- Name Input -->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="54dp"
+            android:background="@drawable/edittext_background"
+            android:hint="@string/name"
+            android:textColor="#ffff"
+            android:textColorHint="#FFFEFE"
+            android:padding="12dp"
+            android:inputType="textPersonName"
+            android:autofillHints="username" />
+
+        <!-- Email or Phone Number Input -->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/edittext_background"
+            android:hint="@string/email_or_phone_number"
+            android:textColor="#ffff"
+            android:textColorHint="#FFFEFE"
+            android:padding="12dp"
+            android:inputType="textEmailAddress"
+            android:autofillHints="emailAddress" />
+
+        <!-- Password Input -->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editTextEmail"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/edittext_background"
+            android:hint="@string/password"
+            android:textColor="#ffff"
+            android:textColorHint="#FFFEFE"
+            android:padding="12dp"
+            android:inputType="textPassword"
+            android:autofillHints="password"
+            app:passwordToggleEnabled="true"/>
+
+        <!-- Sign In Button -->
+        <Button
+            android:id="@+id/buttonSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editTextPassword"
+            android:layout_marginTop="24dp"
+            android:textAllCaps="false"
+            android:background="@drawable/button_background"
+            android:textColor="#FFFEFE"
+            android:textSize="19sp"
+            android:text="@string/sign_up" />
+
+        <Button
+            android:id="@+id/buttonRegisterGoogle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_background"
+            android:text="@string/register_button_google"
+            android:textColor="#F0F0F0"
+            android:textSize="16sp"
+            android:layout_below="@id/buttonSignUp"
+            />
+
+        <!-- Sign up link -->
+        <TextView
+            android:id="@+id/textViewSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/buttonRegisterGoogle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:text="@string/new_to_news_sign_in_now"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+
+        <!-- reCAPTCHA text -->
+        <TextView
+            android:id="@+id/textViewRecaptcha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewSignUp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:text="@string/sign_up_is_protected_by_google_recaptcha_to_ensure_you_re_not_a_bot_learn_more"
+            android:textColor="#757575"
+            android:textSize="12sp" />
+    </RelativeLayout>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:indeterminateTint="#F44336"
+        android:soundEffectsEnabled="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</LinearLayout>

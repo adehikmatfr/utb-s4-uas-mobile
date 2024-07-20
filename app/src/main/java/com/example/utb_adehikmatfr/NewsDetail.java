@@ -65,7 +65,7 @@ public class NewsDetail extends AppCompatActivity {
                         .delete()
                         .addOnSuccessListener(aVoid -> {
                             Toast.makeText(NewsDetail.this, "News deleted successfully", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(NewsDetail.this, MainActivity.class);
+                            Intent intent = new Intent(NewsDetail.this, HomeActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                             finish(); // Close the activity and go back to the previous screen
